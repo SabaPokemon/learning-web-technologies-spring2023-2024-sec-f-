@@ -1,0 +1,39 @@
+<home_addresses>
+	<home_address sr="1">
+		<id> 1 </id>
+		<address d="1"> 
+			<house>38</house>
+			<road> 03</road>
+			<place> Banani</place>
+			<district> Dhaka </district>
+		</address>
+		<department> Sales</department>
+		<salary> 20000 </salary>
+	</home_address>
+
+	<home_address sr="2">
+		<id> 2 </id>
+		<address d="2"> 
+			<flat_number> A/1</flat_number>
+			<house>20</house>
+			<road> 18</road>
+			<place> Mirpur</place>
+			<district> Dhaka </district>
+		</address>
+		<department> Accounts</department>
+		<salary> 12000 </salary>
+	</home_address>
+	
+	<home_address sr="3">
+		<id> 3 </id>
+		<address d="3">
+		    <house>38</house>
+			<road> 3</road>
+			<place> Motihjeel</place>
+			<district> </district>
+		</address>
+		<department> Human Resouce</department>
+		<salary> 30000 </salary>
+			
+	</home_address>
+</home_addresses>
