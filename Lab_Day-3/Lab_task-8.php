@@ -1,43 +1,50 @@
 <?php
-
+$array = [
+  [1,2,3,'A'],
+  [1,2,'B','C'],
+  [1,'D','E','F'],
+];
 echo "<table cellpadding='0' cellspacing='0' border='1' align='center' width='50%' height='50px'>";
 
-echo "<tr>";
- echo "<td> The array to declear</td>";
+echo "<tr align='center' >";
+ echo "<td > The array to declear</td>";
  echo "<td> Shapes to print</td>";
 echo "<tr>";
 echo "<td>";
- for($i=3; $i>=1; $i--)
+echo "<table  cellpadding='0' cellspacing='0' border='1' align='center' width='80%' height='20px' style='background-color: #f2f2f2;'>";
+ for($i=0; $i<3; $i++)
   {
-    for($j=1;$j<=$i; $j++)
+    echo "<tr align='center'>";
+    for($j=0;$j<4; $j++)
     {
-        echo $j." ";
+      echo "<td>";
+      echo $array[$i][$j];
+      echo "</td>";
     }
-    echo "<br>";
+    echo "</tr>";
   }
+  echo "</table>";
   echo "</td>";
   
   echo "<td>";
-  echo "<table  cellpadding='0' cellspacing='0' border='1' align='center' width='20%' height='20px'>";
+  echo "<table  cellpadding='0' cellspacing='0' border='1' align='center' width='80%' height='20px' style='background-color: #f2f2f2;'>";
 echo "<tr>";
 echo "<td>";
-for($i=3; $i>=1; $i--)
+for($i=0; $i<3; $i++)
   {
-    for($j=1;$j<=$i; $j++)
+    for($j=0;$j<3-$i; $j++)
     {
-        echo $j." ";
+        echo $array[$i][$j]." ";
     }
     echo "<br>";
   }
   echo "</td>";
  echo "<td>";
- $c='A';
-  for($i=0; $i<3; $i++)
+for($i=0; $i<3; $i++)
   {
-    for($j=0;$j<=$i; $j++)
+    for($j=3-$i;$j<=3; $j++)
     {
-        echo $c." ";
-        $c++;
+        echo $array[$i][$j]." ";
     }
     echo "<br>";
   }
