@@ -1,6 +1,7 @@
 
 <?php
 require_once('../model/userModel.php');
+require_once('../model/db.php');
 if (!isset($_COOKIE['flag'])) {
     header('location: ../view/login.php');
 }
@@ -13,11 +14,10 @@ $users = getAllUser();
 <html lang="en">
 
 <head>
-    <title>User Management</title>
+    <title>Employee Management</title>
 </head>
 
 <body>
-
     
         <table border="1" cellpadding="6" cellspacing="0" width="60%" align="center">
             <tr>
@@ -35,7 +35,7 @@ $users = getAllUser();
                         </tr>
                         <tr>
                             <td colspan="8" align="center">
-                                <h1>Users</h1>
+                                <h1>Employees</h1>
                             </td>
                         </tr>
                         <tr>
@@ -45,11 +45,14 @@ $users = getAllUser();
                             
                             <a href="../view/update.php"><button>Update</button></a>
                             </td>
+                            <form method="post">
                             <td>
-                                <input type="text" name="search" ><a href="../view/search.php"><button>Search</button></a>
+                                <input type="text" name="search" ><button name="submit">Search</button>
                             </td>
+                            </form>
 
                         </tr>
+                        <tr>
                         <td>
                             <table border="1" cellpadding="6" cellspacing="0" width="60%" align="center">
                                 <tr>
@@ -73,16 +76,43 @@ $users = getAllUser();
                                 <?php } ?>
                             </table>
                         </td>
+
+                        <td>
+                        <table border="1" cellpadding="6" cellspacing="0" width="60%" align="center">
+                        <?php if(isset($_POST['submit']))
+                                    {
+                                        $search=$_POST['search'];
+                                        $con = dbConnection();
+                                        $sql = "SELECT * FROM emp WHERE name LIKE '%{$search}%' OR username LIKE '%{$search}%'";     
+                                        $result = mysqli_query($con, $sql);  
+                                        if($result){
+                                       ?>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Contact</td>
+                                    <td>User Name</td>
+                                    <td>Password</td>
+                                </tr>
+                                <?php  while($row = mysqli_fetch_assoc($result)){
+                                        
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row['name'];?></td>
+                                        <td><?php echo $row['contact']; ?></td>
+                                        <td><?php echo $row['username']; ?></td>
+                                        <td><?php echo $row['password']; ?></td>
+                                    </tr>
+                                <?php } }else{ ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo "No Data found"; ?>
+                                        </td>
+                                    </tr>
+                            <?php }} ?>
+                            </table>
+                        </td>
             </tr>
 
-            <tr>
-                <td>
-                    <a href="../controller/logoutCheck.php"><button>Log out</button></a>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" align="center" height="50px">Copyright © 2024. SAN Tour. All rights reserved</td>
-            </tr>
         </table>
         </td>
         </tr>
