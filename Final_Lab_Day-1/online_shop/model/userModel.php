@@ -1,6 +1,6 @@
 <?php 
     require_once('../model/db.php');
-    
+    $emps=[];
     function login($email, $password){
         session_start();
         $role="emp";
@@ -37,25 +37,29 @@
         }
         
     }
-  
-    function createUser($username,$password,$email){
-        $role="user";
+    
+
+    function updateUser($name,$contact,$username,$password){
         $con = dbConnection();
-        $sql = "insert into user values('{$username}', '{$password}', '{$email}', '{$role}')";       
-        if(mysqli_query($con, $sql)){
-            return true;
-        }else{
+        $sql = "update emp set name='{$name}', contact='{$contact}', password='{$password}' where username='{$username}'";       
+        if (mysqli_query($con, $sql)) {
+            $sql1 = "update user set password='{$password}' where username='{$username}'";
+            if (mysqli_query($con, $sql1)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
-    
 
-    function alterUser($name,$contact,$username,$password){
+    function editProduct($pname,$quantity,$price){
         $con = dbConnection();
-        $sql = "update emp set name='{$name}', contact='{$contact}', username='{$username}' where password='{$password}'";       
-        if(mysqli_query($con, $sql)){
-            return true;
-        }else{
+        $sql = "update product set quantity='{$quantity}', price='{$price}' where productName='{$pname}'";       
+        if (mysqli_query($con, $sql)) {
+                return true;
+        } else {
             return false;
         }
     }
@@ -64,7 +68,7 @@
 
     function getAllUser(){
         $con = dbConnection();
-        $sql = "select name,contact,username,password from emp ";
+        $sql = "select * from emp ";
         $result = mysqli_query($con, $sql);
         $users = [];
 
@@ -75,28 +79,73 @@
         return $users;
     }
 
-    
+    function getAllProduct(){
+        $con = dbConnection();
+        $sql = "select * from product ";
+        $result = mysqli_query($con, $sql);
+        $products = [];
+
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($products, $row);
+        }
+        
+        return $products;
+    }
 
     function deleteUser($name){
         $con = dbConnection();
         $sql = "DELETE FROM emp WHERE username='{$name}'";       
         if(mysqli_query($con, $sql)){
-            return true;
+            $sql1 = "DELETE FROM user WHERE username='{$name}'";
+            if (mysqli_query($con, $sql1)) {
+                return true;
+            } else {
+                return false;
+            }
         }else{
             return false;
         }
 
     }
 
-    function addUser($name,$contact,$username,$password){
+    function deleteProduct($pname){
         $con = dbConnection();
-        $sql = "insert into emp values('{$name}', '{$contact}', '{$username}', '{$password}')";       
+        $sql = "DELETE FROM product WHERE productName='{$pname}'";       
         if(mysqli_query($con, $sql)){
-            return true;
+                return true;
+           
         }else{
             return false;
         }
+
     }
+
+    function addUser($name, $contact, $username, $password) {
+        $con = dbConnection();
+        $sql = "INSERT INTO emp (name, contact, username, password) VALUES ('$name', '$contact', '$username', '$password')";
+        if (mysqli_query($con, $sql)) {
+            $sql1 = "INSERT INTO user (username, password,email,position) VALUES ('$username', '$password','$username@gmail.com','emp')";
+            if (mysqli_query($con, $sql1)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function addProduct($pname,$quantity,$price) {
+        $con = dbConnection();
+        $sql = "INSERT INTO product (productName, quantity, price) VALUES ('$pname', '$quantity', '$price')";
+        if (mysqli_query($con, $sql)) {
+                return true;
+        } else {
+            return false;
+        }
+    }
+
+   
 
 
 ?>
