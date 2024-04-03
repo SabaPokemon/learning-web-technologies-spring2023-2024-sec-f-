@@ -11,21 +11,48 @@
         header('location: ../view/management.php');
     }
 
-    function validateName($name) {
-        $trimmedName = trim($name);
+    function validateUsername($username) {
+        $trimmedName = trim($username);
         if ($trimmedName === '' || !ctype_alpha(str_replace(' ', '', $trimmedName))) {
             return false;
         }
         return true;
     }
 
+    function validateName($name) {
+        $trimmedName = trim($name);
+        if ($trimmedName === '') {
+            return false;
+        }
+        for ($i = 0; $i < strlen($trimmedName); $i++) {
+            if (!(ctype_alpha($trimmedName[$i]) || $trimmedName[$i] === ' ' || $trimmedName[$i] === '-')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function validateContactNumber($contact) {
+        $trimmedNumber = trim($contact);
+        if (strlen($trimmedNumber) === 11 && ctype_digit($trimmedNumber)) {
+            return true;
+        }
+        return false; 
+    }
+
     if(isset($_POST['add'])){
     if($name == "" || $contact == "" || $username == "" || $password==""){
-        echo "null username/role/email";
+        echo "fill-up all";
+    } elseif (!validateUsername($username)) {
+        echo "invalid username";
     } elseif (!validateName($name)) {
         echo "invalid name";
-    } elseif (strlen($name)<4) {
-        echo "name has to be atleast in 4 letters";
+    }elseif (!validateContactNumber($contact)) {
+        echo "Contact number must be in XXXXXXXXXXX format";
+    }  elseif (!strlen($password)<8) {
+        echo "8 charaters needed in password";
+    }  elseif (strlen($username)<4) {
+        echo "username has to be atleast in 4 letters";
     }else {
 
         $status = addUser($name,$contact,$username,$password);
