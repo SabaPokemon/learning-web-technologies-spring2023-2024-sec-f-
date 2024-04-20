@@ -166,7 +166,41 @@
           if (picture == "") {
             alert("Picture cannot be empty");
           }
-        };
+        }
+
+        let checkFirstChr = (chr) => {
+                return (chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z');
+            }
+         
+            let checkChr = (name) => {
+                for (let i = 0; i < name.length; i++) {
+                    let chr = name[i];
+                    if (!((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || chr === '.' || chr === '-' || chr === ' ')) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            function containsAt(variable) {
+    for (let i = 0; i < strlen(variable); i++) {
+        if (variable[i] === '@') {
+            return true;
+        }
+    }
+    return false;
+}
+let isValidDate = (day, month, year) => {
+          if (year < 1900 || year > 2016) {
+            return false;
+          }
+          if (month < 1 || month > 12) {
+            return false;
+          }
+          if (day < 1 || day > 31) {
+            return false;
+          }
+          return true;
+        }
       </script>
     </table>
   </body>
