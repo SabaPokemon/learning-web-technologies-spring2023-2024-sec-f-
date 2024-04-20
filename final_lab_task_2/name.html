@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Name</title>
+    </head>
+    <body>
+        Name <br>
+        <input type="text" name="name" id="name" > <br>
+        <input type="button" name="submit" value="Submit" onclick="name()">
+        <script>
+            let checkName = () => {
+                let name = document.getElementById('name').value;
+                let test = "Successful";
+                if (name === "") {
+                    test = "Name cannot be empty";
+                } else if (name.split(' ').length < 2) {
+                    test = "Name has to contain at least two words";
+                } else if (!checkFirstChr(name[0])) {
+                    test = "Name must start with a letter";
+                } else if (!checkChr(name)) {
+                    test = "Name can only contain letters (a-z or A-Z), dot, dash, or space";
+                } else {
+                    alert("Success");
+                }
+                alert(test);
+            }
+         
+            let checkFirstChr = (chr) => {
+                return (chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z');
+            }
+         
+            let checkChr = (name) => {
+                for (let i = 0; i < name.length; i++) {
+                    let chr = name[i];
+                    if (!((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || chr === '.' || chr === '-' || chr === ' ')) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
+    </body>
+</html>

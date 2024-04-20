@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Task 7</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Profile Picture</legend>
+        User ID &nbsp; <input type="text" name="userid" value=""><br>
+        Picture &nbsp;  <input type="file" name="myfile" value="" /> <br>
+        <hr width="250px" align="left">
+        <input type="submit" name="submit" value="Submit" onclick="validateForm()" />
+    </fieldset>
+    <script>
+        let validateForm = () => {
+            let userId = document.getElementsByName('userid')[0].value;
+            let picture = document.getElementsByName('myfile')[0].value;
+            
+            if (userId == "") {
+                alert("User ID cannot be empty");
+                return false;
+            } else if (picture == "") {
+                alert("Picture cannot be empty");
+                return false;
+            } else{
+                alert("Success");
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+</html>
