@@ -1,123 +1,173 @@
-<html>
-    <body>
-        <table border="1" >
-            <tr>
-                <td>
-                    Name
-                </td>
-                <td>
-                    <input type="text" name="name" id="name" >
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Email
-                </td>
-                <td>
-                    <input type="text" name="email" id="email" > 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Gender
-                </td>
-                <td>
-                    <input type="radio" name="gender" value="" /> Male
-        <input type="radio" name="gender" value="" /> Female
-        <input type="radio" name="gender" value="" /> Other
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Date of Birth
-                </td>
-                <td>
-                    <input type="text" name="dob-day" size="1px" value="" /> /
-        <input type="text" name="dob-month" size="1px" value="" /> /
-        <input type="text" name="dob-year" size="1px" value="" /> <i>(dd/mm/yyyy)</i>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Blood Group
-                </td>
-                <td>
-                    <select name="Blood">
-                        <option value="">A+</option>
-                        <option value="">B+</option>
-                        <option value="">O+</option>
-                        <option value="">A-</option>
-                        <option value="">B-</option>
-                        <option value="">O-</option>
-                        <option value="">AB+</option>
-                        <option value="">AB-</option>
-                      </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Degree
-                </td>
-                <td>
-                    <input type="checkbox" name="check" value="" /> SSC
-        <input type="checkbox" name="check" value="" /> HSC
-        <input type="checkbox" name="check" value="" /> BSc.
-        <input type="checkbox" name="check" value="" /> MSc.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Photo
-                </td>
-                <td>
-                    <input type="file" name="myfile" value="" />
-                </td>
-            </tr>
-            <tr>
-                <td></td><td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" name="submit" value="Submit" onclick="validateForm()" />
-                    <input type="submit" name="Reset" value="Reset" onclick="validateForm()" />
-                </td>
-            </tr>
-        </table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Task 8</title>
+  </head>
+  <body>
+    <table border="1" cellspacing="0" align="center" width="30%">
+      <tr>
+        <th colspan="3">PERSON PROFILE</th>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input type="text" name="name" value="" id="name" />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input type="email" name="email" value="" id="email" />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" name="gender" value="" /> Male
+          <input type="radio" name="gender" value="" /> Female
+          <input type="radio" name="gender" value="" /> Other<br />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td>
+          <input type="text" name="dob-day" size="1px" value="" /> /
+          <input type="text" name="dob-month" size="1px" value="" /> /
+          <input type="text" name="dob-year" size="1px" value="" />&nbsp;&nbsp;
+          <i>(dd/mm/yyyy)</i>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Blood Group</td>
+        <td>
+          <select name="">
+            <option value="">A+</option>
+            <option value="">B+</option>
+            <option value="">O+</option>
+            <option value="">A-</option>
+            <option value="">B-</option>
+            <option value="">O-</option>
+          </select>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Degree</td>
+        <td>
+          <input type="checkbox" name="check" value="" /> SSC
+          <input type="checkbox" name="check" value="" /> HSC
+          <input type="checkbox" name="check" value="" /> BSc.
+          <input type="checkbox" name="check" value="" /> MSc.
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Photo</td>
+        <td>
+          <input type="file" name="myfile" value="" />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th colspan="3" height="20px"></th>
+      </tr>
+      <tr>
+        <th colspan="3" align="right">
+          <input
+            type="button"
+            name="submit"
+            value="Submit"
+            onclick="validateForm()"
+          />
+          <input type="button" name="reset" value="Reset" />
+        </th>
+      </tr>
+      <script>
+        let validateForm = () => {
+          let name = document.getElementById("name").value;
+          if (name == "") {
+            alert("Name cannot be empty");
+          } else if (name.split(" ").length < 2) {
+            alert("Name has to contain at least two words");
+          } else if (!checkFirstChr(name[0])) {
+            alert("Name must start with a letter");
+          } else if (!checkChr(name)) {
+            alert(
+              "Name can only contain letters (a-z or A-Z), dot, dash, or space"
+            );
+          }
 
-        <script>
-             let validateForm = () => {
-                let name = document.getElementById('name').value;
-                let test = "Successful";
-                if (name === "") {
-                    test = "Name cannot be empty";
-                } else if (name.split(' ').length < 2) {
-                    test = "Name has to contain at least two words";
-                } else if (!checkFirstChr(name[0])) {
-                    test = "Name must start with a letter";
-                } else if (!checkChr(name)) {
-                    test = "Name can only contain letters (a-z or A-Z), dot, dash, or space";
-                } else {
-                    alert("Success");
-                }
-                alert(test);
-             }
-         
-            let checkFirstChr = (chr) => {
-                return (chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z');
-            }
-         
-            let checkChr = (name) => {
-                for (let i = 0; i < name.length; i++) {
-                    let chr = name[i];
-                    if (!((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || chr === '.' || chr === '-' || chr === ' ')) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-             
-        </script>
+          let email = document.getElementById("email").value;
+          let test = "Successful";
 
-    </body>
+          if (email === "") {
+            test = "Email cannot be empty";
+          } else if (!isValidEmail(email)) {
+            test = "Invalid email format";
+          }
+
+          alert(test);
+
+          let genders = document.getElementsByName("gender");
+          let isChecked = false;
+
+          for (let i = 0; i < genders.length; i++) {
+            if (genders[i].checked) {
+              isChecked = true;
+              break;
+            }
+          }
+          if (!isChecked) {
+            alert("At least one gender must be selected");
+          }
+
+          let day = parseInt(document.getElementsByName("dob-day")[0].value);
+          let month = parseInt(
+            document.getElementsByName("dob-month")[0].value
+          );
+          let year = parseInt(document.getElementsByName("dob-year")[0].value);
+          if (isNaN(day) || isNaN(month) || isNaN(year)) {
+            test = "Date of birth cannot be empty";
+          } else if (!isValidDate(day, month, year)) {
+            test = "Invalid date of birth";
+          } else {
+            alert("Success");
+          }
+
+          alert(test);
+          let checkboxes = document.getElementsByName("check");
+          isChecked = false;
+
+          for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+              isChecked = true;
+              break;
+            }
+          }
+
+          if (!isChecked) {
+            alert("At least one degree must be selected");
+          }
+
+          let selectElement = document.getElementById("selectOption");
+          let selectedIndex = selectElement.selectedIndex;
+
+          if (
+            selectedIndex === -1 ||
+            !selectElement.options[selectedIndex].value
+          ) {
+            alert("Please select an option");
+          }
+          let picture = document.getElementsByName("myfile")[0].value;
+          if (picture == "") {
+            alert("Picture cannot be empty");
+          }
+        };
+      </script>
+    </table>
+  </body>
 </html>
